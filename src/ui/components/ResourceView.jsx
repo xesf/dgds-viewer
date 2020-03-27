@@ -85,7 +85,7 @@ const ResourceView = ({ entries, data }) => {
             {data.scripts
                 && (
                     <div style={{
-                        height: '350px',
+                        height: '300px',
                         width: '640px',
                         overflowY: 'scroll'
                     }}

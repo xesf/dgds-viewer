@@ -1,17 +1,14 @@
-# castaway
+# dgds-viewer
 
-The aim of this project is to provide a complete re-implemtation of the Johnny Castaway Screen Saver created by Dynamix using Javascript.
+The aim of this project is to provide resource viewer of the various games developed by Dynamix using their Dynamix Game Development System engine.
 
-![alt text](castaway.png "Dynamix Johnny Castaway Screen Saver")
-
-## Live Demo
-
-[Check here the current development state](http://castaway.xesf.net/#entry=MJFISH.TTM)
+![alt text](dynamix.png "Dynamix")
 
 ## Purpose
-- Re-implementation of the Johnny Castaway Screen Saver;
 
 - Learn the Dynamix Game Development System (DGDS);
+
+- Dump Resources on a more readable format;
 
 - Document the files format used;
 
@@ -23,28 +20,32 @@ The aim of this project is to provide a complete re-implemtation of the Johnny C
 
 - Have fun implementing it!!
 
-## Enhancements
-
-List of new features to add to Johnny Castaway experience:
-* Day/Night loop in 24h instead of 8h
-* Day/Night based on user location sunrise and sunset
-* Moving cloulds
-* Add waves like the static screen
-* Accelarate time
-* Tides based on user locations with real time coutry low tide info
-* Play Full Story Sequence
-    * Choose single activities to play
-* Number of full complete stories played worldwide
-* Total hours worldwide played
-* Statistics per Activity
-    * Total Jogging
-    * Fishing
-    * etc.
-* Extend festive days from the original - could be based on user location
-
 ## Documents
 
 [Resource Index File Format](docs/resindex.md)
+
+## Games
+
+### Johnny Castaway Screen Saver (1992)
+
+![alt text](castaway.png "Johnny Castaway Screen Saver")
+
+### Quarky & Quaysoo's Turbo Science (1992)
+
+![alt text](turbosci.png "Quarky & Quaysoo's Turbo Science")
+
+### The Adventures of Willy Beamish (1991)
+
+![alt text](willy.png "The Adventures of Willy Beamish")
+
+### Heart of China (1991)
+
+![alt text](hoc.png "Heart of China")
+
+### Rise of the Dragron (1990)
+
+![alt text](dragon.png "Rise of the Dragron")
+
 
 ## Usage
 
@@ -56,30 +57,18 @@ Install:
 
 Run this commands in the root folder:
 
-> yarn global add lerna
+> yarn install
 
-> lerna bootstrap
-
-### Dump Resources
-
-This application allows you to extract the resources of Johnny Castaway. A data/dump folder will be created when application is executed.
-
-> cd projects/dump
-
-> yarn start
 
 ### Viewer
 
 This application allows you to browse through the resources and play them.
 
-> cd projects/viewer
-
 > yarn start
 
-### Mobile
 
-A ReactNative experimental application to play Johnny Castaway. At the moment it only executes the viewer as a web view, but in future should play the whole story.
+### Dump Resources
 
-> cd projects/mobile
+This application allows you to extract the resources of Johnny Castaway. A data/dump folder will be created when application is executed.
 
-> yarn start
+> yarn dump
