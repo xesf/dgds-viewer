@@ -9,24 +9,28 @@ import ResourceContent from './components/ResourceContent';
 import { preloadFileAsync } from '../utils/preload';
 import { loadResources } from '../resources';
 
+const GameResources = {
+    castaway: 'RESOURCE.MAP',
+    turbosci: 'RESOURCE.MAP',
+    hoc: 'VOLUME.RMF',
+    willy: 'VOLUME.RMF',
+    dragon: 'VOLUME.VGA',
+};
+
 const ViewerApp = ({ game }) => {
     const [resindex, setResindex] = useState();
 
     useEffect(() => {
-        if (!resindex) {
-            async.auto({
-                resindex: preloadFileAsync(`data/${game}/RESOURCE.MAP`),
-                res: preloadFileAsync(`data/${game}/RESOURCE.001`),
-            }, (err, files) => {
-                // todo
-                setResindex(loadResources(files.resindex, files.res));
-            });
-        }
+        async.auto({
+            resindex: preloadFileAsync(`data/${game}/${GameResources[game]}`),
+        }, (err, files) => {
+            setResindex(loadResources(files.resindex));
+        });
         return () => {};
-    });
+    }, [game]);
 
     return (
-        <div style={{ width: 'auto', height: 'auto', backgroundColor: '#fff' }}>
+        <div key={game} style={{ width: 'auto', height: 'auto', backgroundColor: '#fff' }}>
             <div className="ui visible sidebar inverted vertical menu small viewer-bkg" style={{ margin: '0', top: '40px', height: 'auto', overflowY: 'scroll' }}>
                 {resindex && <ResourceList res={resindex} />}
             </div>
