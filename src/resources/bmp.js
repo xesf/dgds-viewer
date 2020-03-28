@@ -1,6 +1,6 @@
-import { PALETTE } from '../constants';
 import { getString } from '../utils/string';
 import { decompress } from '../compression';
+import { RESOURCES } from '../global';
 
 export function loadBMPResourceEntry(entry) {
     let offset = 0;
@@ -61,10 +61,10 @@ export function loadBMPResourceEntry(entry) {
                     image.buffer[w + image.width * h] = c;
                     image.pixels[w + image.width * h] = {
                         index: c,
-                        a: PALETTE[c].a,
-                        r: PALETTE[c].r,
-                        g: PALETTE[c].g,
-                        b: PALETTE[c].b,
+                        a: RESOURCES.PALETTE[c].a,
+                        r: RESOURCES.PALETTE[c].r,
+                        g: RESOURCES.PALETTE[c].g,
+                        b: RESOURCES.PALETTE[c].b,
                     };
                     pixelIndex += 1;
                 }

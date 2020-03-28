@@ -71,7 +71,7 @@ function getSoundFxSource(config, context, data) {
             source.connect();
             callback.call();
         } else {
-            loadAudioAsync(context, `data/samples/sample${index}.aac`, (buffer) => {
+            loadAudioAsync(context, `data/castaway/samples/sample${index}.aac`, (buffer) => {
                 // this bypasses a browser issue while loading same sample in short period of time
                 if (!samplesSourceCache[index]) {
                     if (!source.bufferSource.buffer) {

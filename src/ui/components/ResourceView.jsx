@@ -47,6 +47,9 @@ const ResourceView = ({ entries, data }) => {
                         || resType.type === 'TTM') {
                         const mainContext = mainCanvasRef.current.getContext('2d');
                         context.clearRect(0, 0, 640, 480);
+                        mainContext.clearRect(0, 0, 640, 480);
+                        mainContext.canvas.width = 640;
+                        mainContext.canvas.height = 480;
 
                         startProcess({
                             type: resType.type,

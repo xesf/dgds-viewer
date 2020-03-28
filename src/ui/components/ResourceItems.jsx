@@ -5,7 +5,7 @@ import async from 'async';
 import { preloadFileAsync } from '../../utils/preload';
 import { loadResourcebyName } from '../../resources';
 
-import { RESOURCES } from '../global';
+import { RESOURCES } from '../../global';
 
 const ResourceItems = ({ game, res }) => {
     const [resource, setResource] = useState(null);

@@ -1,4 +1,6 @@
 
+import { RESOURCES } from '../global';
+
 export const drawImage = (image, context, posX, posY) => {
     const img = context.createImageData(image.width, image.height);
     for (let p = 0; p < image.pixels.length; p += 1) {
@@ -62,6 +64,8 @@ export const drawPalette = (data, context) => {
         context.fillStyle = getPaletteColor(c);
         context.fillRect(p * 2, 0, 2, 480);
     }
+
+    RESOURCES.PALETTE = data.palette;
 };
 
 export const drawScreen = (data, context) => {

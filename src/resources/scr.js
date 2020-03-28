@@ -1,6 +1,6 @@
-import { PALETTE } from '../constants';
 import { getString } from '../utils/string';
 import { decompress } from '../compression';
+import { RESOURCES } from '../global';
 
 export function loadSCRResourceEntry(entry) {
     let offset = 0;
@@ -52,7 +52,7 @@ export function loadSCRResourceEntry(entry) {
                     c &= 0x0f;
                     dataIndex += 1;
                 }
-                const pal = PALETTE[c];
+                const pal = RESOURCES.PALETTE[c];
                 image.buffer[w + image.width * h] = c;
                 image.pixels[w + image.width * h] = {
                     index: c,

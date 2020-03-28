@@ -4,7 +4,7 @@ import { loadResourceEntry } from '../resources';
 
 import { drawImage, drawScreen, getPaletteColor } from '../graphics/index';
 import { createAudioManager } from '../audio';
-import { PALETTE } from '../constants';
+import { RESOURCES } from '../global';
 
 let tick = null;
 let prevTick = Date.now();
@@ -161,10 +161,10 @@ const GOTO = (state, tagId) => {
 
 const SET_COLORS = (state, fc, bc) => {
     if (fc < 16) {
-        state.foregroundColor = PALETTE[fc];
+        state.foregroundColor = RESOURCES.PALETTE[fc];
     }
     if (bc < 16) {
-        state.backgroundColor = PALETTE[bc];
+        state.backgroundColor = RESOURCES.PALETTE[bc];
     }
 };
 
@@ -619,7 +619,7 @@ const STOP_SCENE = (state, sceneIdx, tagId, retries) => {
         tagId,
         retries,
     });
-    console.log('STOP_SCENE', removeScenes);
+    // console.log('STOP_SCENE', removeScenes);
     // console.log(scenes);
     // remove(scenes, s => s.sceneIdx === sceneIdx && s.tagId === tagId);
     // const index = scenes.indexOf(s => s.sceneIdx === sceneIdx && s.tagId === tagId);
@@ -794,13 +794,13 @@ const CommandType2 = {
     '0x2010': STOP_SCENE,
     '0x3010': RANDOM_START,
     '0x3020': RANDOM_UNKNOWN_0,
-    '0x30ff': RANDOM_END,
+    '0x30FF': RANDOM_END,
     '0x4000': ADS_UNKNOWN_6,
-    '0xf010': ADS_FADE_OUT,
-    '0xf200': RUN_SCRIPT, 
-    '0xffff': END,
+    '0xF010': ADS_FADE_OUT,
+    '0xF200': RUN_SCRIPT, 
+    '0xFFFF': END,
     // CUSTOM: Added for text script
-    '0xfff0': END_IF,
+    '0xFFF0': END_IF,
 };
 
 const runScript = (state, script, main = false) => {
@@ -810,7 +810,7 @@ const runScript = (state, script, main = false) => {
     for (let i = state.reentry; i < script.length; i++) {
         const c = script[i];
         //const type = CommandType.find(ct => ct.opcode === c.opcode);
-        const callback = CommandType2[`0x${c.opcode.toString(16)}`];
+        const callback = CommandType2[`0x${c.opcode.toString(16).padStart(4, '0').toUpperCase()}`];
         if (!callback || callback === undefined) {
             continue;
         }
@@ -902,8 +902,8 @@ export const startProcess = (initialState) => {
         continue: true,
         frameId: null,
         island: 1,
-        foregroundColor: PALETTE[0],
-        backgroundColor: PALETTE[0],
+        foregroundColor: RESOURCES.PALETTE[0],
+        backgroundColor: RESOURCES.PALETTE[0],
         clip: { x: 0, y: 0, width: 640, height: 480 },
         type: null,
         skip: false,

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { loadResourceEntry } from '../../resources';
 
-import { RESOURCES } from '../global';
+import { RESOURCES } from '../../global';
 
 import ResourceView from './ResourceView';
 
@@ -34,7 +34,6 @@ const ResourceContent = ({ res }) => {
             const e = RESOURCES[`${game}-${resource}`].entries;
             setEntries(e);
             const entry = RESOURCES[`${game}-${resource}`].entries.find((f) => f.name === name);
-            console.log(entry);
             setData(loadResourceEntry(entry));
         }
         return () => {};

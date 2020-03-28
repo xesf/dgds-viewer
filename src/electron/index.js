@@ -17,7 +17,7 @@ function createWindow() {
             ? 'http://localhost:8585'
             : `file://${path.join(__dirname, '../build/index.html')}`
     );
-    mainWindow.webContents.once('dom-ready', () => mainWindow.webContents.openDevTools());
+    // mainWindow.webContents.once('dom-ready', () => mainWindow.webContents.openDevTools());
     mainWindow.on('closed', () => { mainWindow = null; });
 }
 
