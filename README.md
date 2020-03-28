@@ -2,7 +2,7 @@
 
 The aim of this project is to provide resource viewer of the various games developed by Dynamix using their Dynamix Game Development System engine.
 
-![alt text](dynamix.png "Dynamix")
+![alt text](viewer.png "Dynamix Game Development System Viewer")
 
 ## Purpose
 
