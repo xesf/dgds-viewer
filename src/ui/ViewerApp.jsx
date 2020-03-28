@@ -7,7 +7,7 @@ import ResourceList from './components/ResourceList';
 import ResourceContent from './components/ResourceContent';
 
 import { preloadFileAsync } from '../utils/preload';
-import { loadResources } from '../resources';
+import { loadResourceMap } from '../resources';
 
 const GameResources = {
     castaway: 'RESOURCE.MAP',
@@ -24,7 +24,7 @@ const ViewerApp = ({ game }) => {
         async.auto({
             resindex: preloadFileAsync(`data/${game}/${GameResources[game]}`),
         }, (err, files) => {
-            setResindex(loadResources(files.resindex));
+            setResindex(loadResourceMap(files.resindex));
         });
         return () => {};
     }, [game]);
@@ -32,7 +32,7 @@ const ViewerApp = ({ game }) => {
     return (
         <div key={game} style={{ width: 'auto', height: 'auto', backgroundColor: '#fff' }}>
             <div className="ui visible sidebar inverted vertical menu small viewer-bkg" style={{ margin: '0', top: '40px', height: 'auto', overflowY: 'scroll' }}>
-                {resindex && <ResourceList res={resindex} />}
+                {resindex && <ResourceList game={game} res={resindex} />}
             </div>
             <div
                 className="pusher"
@@ -43,7 +43,7 @@ const ViewerApp = ({ game }) => {
                     overflowY: 'scroll'
                 }}
             >
-                {resindex && <ResourceContent res={resindex} />}
+                {resindex && <ResourceContent game={game} res={resindex} />}
             </div>
         </div>
     );

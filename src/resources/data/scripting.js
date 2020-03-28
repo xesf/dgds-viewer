@@ -1,34 +1,34 @@
 
 export const TTMCommandType = [
-    { opcode: 0x0020, command: 'SAVE_BACKGROUND' }, // not used
+    { opcode: 0x0020, command: 'SAVE_BACKGROUND' },
     { opcode: 0x0080, command: 'DRAW_BACKGROUND' },
     { opcode: 0x0110, command: 'PURGE' },
     { opcode: 0x0FF0, command: 'UPDATE' },
     { opcode: 0x1020, command: 'SET_DELAY' },
     { opcode: 0x1050, command: 'SLOT_IMAGE' },
     { opcode: 0x1060, command: 'SLOT_PALETTE' },
-    { opcode: 0x1100, command: 'UNKNOWN_0' }, // Scene related?
+    { opcode: 0x1100, command: 'UNKNOWN_0' },
     { opcode: 0x1110, command: 'SET_SCENE' },
     { opcode: 0x1120, command: 'SET_BACKGROUND' },
     { opcode: 0x1200, command: 'GOTO' },
     { opcode: 0x2000, command: 'SET_COLORS' },
-    { opcode: 0x2010, command: 'SET_FRAME1' },
-    { opcode: 0x2020, command: 'UNKNOWN_3' }, // SET_FRAME2 ???
+    { opcode: 0x2010, command: 'SET_FRAME' },
+    { opcode: 0x2020, command: 'SET_TIMER' },
     { opcode: 0x4000, command: 'SET_CLIP_REGION' },
     { opcode: 0x4110, command: 'FADE_OUT' },
     { opcode: 0x4120, command: 'FADE_IN' },
-    { opcode: 0x4200, command: 'SAVE_IMAGE0' },
-    { opcode: 0x4210, command: 'SAVE_IMAGE1' },
-    { opcode: 0xA000, command: 'UNKNOWN_4' }, // Draw Line related?
-    { opcode: 0xA050, command: 'UNKNOWN_5' }, // Draw Line related?
-    { opcode: 0xA060, command: 'UNKNOWN_6' }, // Draw Line related?
+    { opcode: 0x4200, command: 'DRAW_BACKGROUND_REGION' },
+    { opcode: 0x4210, command: 'SAVE_IMAGE_REGION' },
+    { opcode: 0xA000, command: 'UNKNOWN_4' },
+    { opcode: 0xA050, command: 'SAVE_REGION' },
+    { opcode: 0xA060, command: 'RESTORE_REGION' },
     { opcode: 0xA0A0, command: 'DRAW_LINE' },
     { opcode: 0xA100, command: 'DRAW_RECT' },
     { opcode: 0xA400, command: 'DRAW_BUBBLE' },
     { opcode: 0xA500, command: 'DRAW_SPRITE' },
-    { opcode: 0xA510, command: 'DRAW_SPRITE1' }, // not used
+    { opcode: 0xA510, command: 'DRAW_SPRITE1' },
     { opcode: 0xA520, command: 'DRAW_SPRITE_FLIP' },
-    { opcode: 0xA530, command: 'DRAW_SPRITE3' }, // not used
+    { opcode: 0xA530, command: 'DRAW_SPRITE3' },
     { opcode: 0xA600, command: 'CLEAR_SCREEN' },
     { opcode: 0xB600, command: 'DRAW_SCREEN' },
     { opcode: 0xC020, command: 'LOAD_SAMPLE' },

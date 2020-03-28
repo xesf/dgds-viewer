@@ -37,38 +37,37 @@ export function loadBMPResourceEntry(entry) {
         images[i].height = h;
     }
     block = getString(entry.data, offset, 3);
-    if (block !== 'BIN') {
-        throw `Invalid Type ${block}: expecting block type BIN`;
-    }
-    let blockSize = entry.data.getUint32(offset + 4, true);
-    const compressionType = entry.data.getUint8(offset + 8, true);
-    /* const uncompressedSize = */ entry.data.getUint32(offset + 9, true);
-    offset += 13;
-    blockSize -= 5; // take type and size out of the block
-    const compressedData = new DataView(entry.buffer.slice(offset, offset + blockSize));
-    const data = decompress(compressionType, compressedData, 0, compressedData.byteLength);
-    let dataIndex = 0;
-    let pixelIndex = 0;
-    for (let i = 0; i < numImages; i += 1) {
-        const image = images[i];
-        for (let h = 0; h < image.height; h += 1) {
-            for (let w = 0; w < image.width; w += 1) {
-                let c = data[dataIndex];
-                if (pixelIndex % 2 === 0) {
-                    c >>= 4;
-                } else {
-                    c &= 0x0f;
-                    dataIndex += 1;
+    if (block === 'BIN') {
+        let blockSize = entry.data.getUint32(offset + 4, true);
+        const compressionType = entry.data.getUint8(offset + 8, true);
+        /* const uncompressedSize = */ entry.data.getUint32(offset + 9, true);
+        offset += 13;
+        blockSize -= 5; // take type and size out of the block
+        const compressedData = new DataView(entry.buffer.slice(offset, offset + blockSize));
+        const data = decompress(compressionType, compressedData, 0, compressedData.byteLength);
+        let dataIndex = 0;
+        let pixelIndex = 0;
+        for (let i = 0; i < numImages; i += 1) {
+            const image = images[i];
+            for (let h = 0; h < image.height; h += 1) {
+                for (let w = 0; w < image.width; w += 1) {
+                    let c = data[dataIndex];
+                    if (pixelIndex % 2 === 0) {
+                        c >>= 4;
+                    } else {
+                        c &= 0x0f;
+                        dataIndex += 1;
+                    }
+                    image.buffer[w + image.width * h] = c;
+                    image.pixels[w + image.width * h] = {
+                        index: c,
+                        a: PALETTE[c].a,
+                        r: PALETTE[c].r,
+                        g: PALETTE[c].g,
+                        b: PALETTE[c].b,
+                    };
+                    pixelIndex += 1;
                 }
-                image.buffer[w + image.width * h] = c;
-                image.pixels[w + image.width * h] = {
-                    index: c,
-                    a: PALETTE[c].a,
-                    r: PALETTE[c].r,
-                    g: PALETTE[c].g,
-                    b: PALETTE[c].b,
-                };
-                pixelIndex += 1;
             }
         }
     }

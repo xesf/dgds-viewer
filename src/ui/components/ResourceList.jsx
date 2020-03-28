@@ -1,49 +1,37 @@
 import React, { useState } from 'react';
 import { map } from 'lodash';
 
+import ResourceItems from './ResourceItems';
 
-const ResourceList = ({ res }) => {
-    const [resName, setResName] = useState(res.resources[0].name);
+const ResourceList = ({ game, res }) => {
+    const [name, setName] = useState(null); // res.resources[0].name
 
     return (
         <>
             {map(res.resources,
                 (r) => (
                     <div
-                        className={`item${r.name === resName ? ' active' : ''}`}
+                        key={r.name}
+                        className={`item${r.name === name ? ' active' : ''}`}
                     >
                         <div
                             className="header"
-                            onClick={() => setResName(r.name)}
+                            onClick={() => setName(r.name)}
                             style={{ cursor: 'pointer' }}
                         >
                             {r.name}
                         </div>
-
-                        {/* <a
-                            key={r.name}
-                            className="header"
-                            href="/#"
-                        >
-                            {r.name}
-                        </a> */}
-                        {/* <div className="menu">
-                            {map(r.entries,
-                                (entry) => {
-                                    if (entry.type === 'VIN') {
-                                        return null;
-                                    }
-                                    return (
-                                        <a
-                                            key={entry.name}
-                                            className="item"
-                                            href={`#entry=${entry.name}`}
-                                        >
-                                            {entry.name}
-                                        </a>
-                                    );
-                                })}
-                        </div> */}
+                        {r.name === name && (
+                            <div
+                                className="menu"
+                            >
+                                <ResourceItems
+                                    key={`${r.name}-items`}
+                                    game={game}
+                                    res={res.resources.find((rr) => rr.name === name)}
+                                />
+                            </div>
+                        )}
                     </div>
                 )
             )}

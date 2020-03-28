@@ -164,7 +164,7 @@ function dumpADSScripts(filepath, resindex) {
     }
 }
 
-const filepath = path.join(__dirname, '../../data');
+const filepath = path.join(__dirname, '../../data/castway');
 const fc = fs.readFileSync(path.join(filepath, 'RESOURCE.MAP'));
 const buffer = fc.buffer.slice(fc.byteOffset, fc.byteOffset + fc.byteLength);
 

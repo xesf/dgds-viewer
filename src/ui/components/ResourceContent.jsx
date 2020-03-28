@@ -2,17 +2,24 @@ import React, { useState, useEffect } from 'react';
 
 import { loadResourceEntry } from '../../resources';
 
-import PlayView from './PlayView';
+import { RESOURCES } from '../global';
+
 import ResourceView from './ResourceView';
 
 const ResourceContent = ({ res }) => {
     const [data, setData] = useState();
     const [entries, setEntries] = useState();
-    const [name, setName] = useState(window.location.hash.split('=')[1]);
-    const isPlayMode = name === 'PLAY';
+    const [game, setGame] = useState();
+    const [resource, setResource] = useState();
+    const [name, setName] = useState();
 
     const onHashChanged = () => {
-        setName(window.location.hash.split('=')[1]);
+        const hash = window.location.hash;
+        if (hash) {
+            setGame(hash.split('=')[1].split(',')[0]);
+            setResource(hash.split('=')[1].split(',')[1]);
+            setName(hash.split('=')[1].split(',')[2]);
+        }
     };
 
     useEffect(() => {
@@ -24,23 +31,21 @@ const ResourceContent = ({ res }) => {
 
     useEffect(() => {
         if (name) {
-            const e = res.resources[0].entries;
+            const e = RESOURCES[`${game}-${resource}`].entries;
             setEntries(e);
-            if (!isPlayMode) {
-                const entry = res.resources[0].entries.find((f) => f.name === name);
-                setData(loadResourceEntry(entry));
-            }
+            const entry = RESOURCES[`${game}-${resource}`].entries.find((f) => f.name === name);
+            console.log(entry);
+            setData(loadResourceEntry(entry));
         }
         return () => {};
-    }, [res, name]);
+    }, [res, game, name, resource]);
 
     return (
         <div className="ui basic segment" style={{ overflowY: 'scroll' }}>
             <div className="ui basic segment">
                 <b>{name}</b>
             </div>
-            {data && isPlayMode && <PlayView entries={entries} />}
-            {data && !isPlayMode && <ResourceView entries={entries} data={data} />}
+            {data && <ResourceView entries={entries} data={data} />}
             {!name && 'No resource loaded. Please select one of the resources from the left menu.'}
         </div>
     );
